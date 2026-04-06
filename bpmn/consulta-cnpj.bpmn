@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1xfch5g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.45.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <bpmn:process id="consultar-cnpj" name="Consultar CNPJ" isExecutable="true" camunda:historyTimeToLive="30">
+    <bpmn:startEvent id="StartEvent_1" name="start">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="cnpj" label="Informe o CNPJ" type="string" defaultValue="000000">
+            <camunda:properties />
+            <camunda:validation />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1bxah2l</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1bxah2l" sourceRef="StartEvent_1" targetRef="consulta-cnpj" />
+    <bpmn:userTask id="resultado" name="Visualizar Resultado">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="razao_social" label="Razão Social" type="string" />
+          <camunda:formField id="nome_fantasia" label="Nome Fantasia" type="string" />
+          <camunda:formField id="status" label="Status" type="string" />
+          <camunda:formField id="atividade_principal" label="Atividade Principal" type="string" />
+          <camunda:formField id="uf" label="UF" type="string" />
+          <camunda:formField id="municipio" label="Município" type="string" />
+          <camunda:formField id="porta_api" label="URL Consultada" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_16imjg9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pe5u47</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="consulta-cnpj" name="Consultar CNPJ" camunda:type="external" camunda:topic="consulta-cnpj">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1bxah2l</bpmn:incoming>
+      <bpmn:outgoing>Flow_16imjg9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_16imjg9" sourceRef="consulta-cnpj" targetRef="resultado" />
+    <bpmn:sequenceFlow id="Flow_0pe5u47" sourceRef="resultado" targetRef="Event_1pr9x3h" />
+    <bpmn:endEvent id="Event_1pr9x3h">
+      <bpmn:incoming>Flow_0pe5u47</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="consultar-cnpj">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="189" y="145" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ibifre_di" bpmnElement="consulta-cnpj">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ksf5rr_di" bpmnElement="Event_1pr9x3h">
+        <dc:Bounds x="692" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05jch4d_di" bpmnElement="resultado">
+        <dc:Bounds x="480" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1bxah2l_di" bpmnElement="Flow_1bxah2l">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="280" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16imjg9_di" bpmnElement="Flow_16imjg9">
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="480" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pe5u47_di" bpmnElement="Flow_0pe5u47">
+        <di:waypoint x="580" y="120" />
+        <di:waypoint x="692" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
