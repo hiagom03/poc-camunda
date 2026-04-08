@@ -4,28 +4,39 @@ import requests
 
 def consulta_cnpj(task):
     cnpj = task.get_variable("cnpj")
-
     print(f"[Worker] Recebido CNPJ: {cnpj}")
 
-    url = f"https://www.receitaws.com.br/v1/cnpj/{cnpj}"
-    response = requests.get(url)
-    data = response.json()
+    try:
+        url = f"https://www.receitaws.com.br/v1/cnpj/{cnpj}"
+        response = requests.get(url, timeout=10)
 
-    print("[Worker] Dados recebidos:", data)
+        if response.status_code != 200:
+            raise ValueError(f"HTTP {response.status_code}")
 
-    return task.complete(
-        {
-            "razao_social": data.get("nome"),
-            "nome_fantasia": data.get("fantasia"),
-            "status": data.get("situacao"),
-            "atividade_principal": data.get("atividade_principal", [{}])[
-                0
-            ].get("text"),
-            "uf": data.get("uf"),
-            "municipio": data.get("municipio"),
-            "porta_api": url,
-        }
-    )
+        data = response.json()
+
+        if data.get("status") == "ERROR":
+            raise ValueError(data.get("message"))
+
+        return task.complete(
+            {
+                "razao_social": data.get("nome"),
+                "nome_fantasia": data.get("fantasia"),
+                "status": data.get("situacao"),
+                "atividade_principal": data.get("atividade_principal", [{}])[
+                    0
+                ].get("text"),
+                "porte": data.get("porte"),
+                "uf": data.get("uf"),
+                "municipio": data.get("municipio"),
+                "porta_api": url,
+            }
+        )
+
+    except Exception as e:
+        print("[Worker] Erro capturado:", e)
+
+        return task.bpmn_error(error_code="ERRO_CNPJ", error_message=str(e))
 
 
 worker = ExternalTaskWorker(
