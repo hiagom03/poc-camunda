@@ -1,4 +1,5 @@
 from camunda.external_task.external_task_worker import ExternalTaskWorker
+from datetime import datetime
 import requests
 
 
@@ -18,6 +19,17 @@ def consulta_cnpj(task):
         if data.get("status") == "ERROR":
             raise ValueError(data.get("message"))
 
+        abertura = data.get("abertura")
+        if abertura:
+            d = datetime.strptime(abertura, "%d/%m/%Y")
+            hoje = datetime.now()
+
+            idade = hoje.year - d.year
+            if (hoje.month, hoje.day) < (d.month, d.day):
+                idade -= 1
+        else:
+            idade = 0
+
         return task.complete(
             {
                 "razao_social": data.get("nome"),
@@ -30,6 +42,7 @@ def consulta_cnpj(task):
                 "uf": data.get("uf"),
                 "municipio": data.get("municipio"),
                 "porta_api": url,
+                "idade": idade,
             }
         )
 

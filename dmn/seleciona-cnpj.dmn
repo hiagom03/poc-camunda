@@ -2,33 +2,135 @@
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1snz6k5" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.45.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
   <decision id="seleciona-cnpj" name="Decision 1" camunda:historyTimeToLive="2">
     <decisionTable id="DecisionTable_1yxo4tf" hitPolicy="FIRST">
-      <input id="Input_1" label="uf">
-        <inputExpression id="InputExpression_1" typeRef="string">
-          <text>uf</text>
+      <input id="InputClause_0oe4uwd" label="status" camunda:inputVariable="status">
+        <inputExpression id="LiteralExpression_1lkj5gn" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0y56ynj">
+          <text>"ATIVA"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1gy5jbd" label="uf" camunda:inputVariable="uf">
+        <inputExpression id="LiteralExpression_16ohh78" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0v8t027">
+          <text>"SP","RJ","MG"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0uu087n" label="porte" camunda:inputVariable="porte">
+        <inputExpression id="LiteralExpression_1yt5hy8" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0ak3mvn">
+          <text>"DEMAIS"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1ur4u33" label="idade" camunda:inputVariable="idade">
+        <inputExpression id="LiteralExpression_13ifv0i" typeRef="integer">
+          <text></text>
         </inputExpression>
       </input>
       <output id="Output_1" label="selecionada" name="selecionada" typeRef="boolean" />
       <rule id="DecisionRule_17psyls">
-        <inputEntry id="UnaryTests_1iwrckt">
-          <text>"SP"</text>
+        <inputEntry id="UnaryTests_058o3rt">
+          <text>"ATIVA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_145etm5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bwg5yc">
+          <text>"DEMAIS"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06obnvs">
+          <text>&gt;5</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0zg20rf">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0wozsrr">
-        <inputEntry id="UnaryTests_15bqxbh">
-          <text>"MG"</text>
+        <inputEntry id="UnaryTests_0jwdlh6">
+          <text>"ATIVA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ym0war">
+          <text>"SP"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jo1hxz">
+          <text>-(any)</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p3iajz">
+          <text>&gt;5</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1ywhxns">
-          <text>false</text>
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18qnef6">
+        <inputEntry id="UnaryTests_0cwnvos">
+          <text>"ATIVA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dgfbth">
+          <text>"RJ"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gftk5s">
+          <text>-(any)</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i7dsgh">
+          <text>&gt;5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cm3gby">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1x96sxk">
+        <inputEntry id="UnaryTests_07klqpw">
+          <text>"ATIVA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16u7mo2">
+          <text>"MG"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uac4ti">
+          <text>-(any)</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07ymgdf">
+          <text>&gt;5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kjr09r">
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_14jx4jt">
-        <inputEntry id="UnaryTests_0euq0vx">
-          <text></text>
+        <inputEntry id="UnaryTests_1n74nqa">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x6cv80">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cp4jj0">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1df7vup">
+          <text>&gt;5</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0qe4xea">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k0vccq">
+        <inputEntry id="UnaryTests_0qsuzc3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k6uuzm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l52h9f">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a5v1kp">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0o0g517">
           <text>false</text>
         </outputEntry>
       </rule>

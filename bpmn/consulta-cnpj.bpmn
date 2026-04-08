@@ -44,53 +44,27 @@
       <bpmn:outgoing>empresa_inativa</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="empresa_ativa" name="Sim" sourceRef="Gateway_1if348h" targetRef="Activity_16cgyu3">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${selecao}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${selecionada}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="empresa_inativa" name="Não" sourceRef="Gateway_1if348h" targetRef="Activity_0hegg77">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!selecao}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!selecionada}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0d6eeml">
       <bpmn:incoming>Flow_0z1inru</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:businessRuleTask id="Activity_18gp6ln" name="Selecionar CNPJ" camunda:resultVariable="selecao" camunda:decisionRef="seleciona-cnpj" camunda:mapDecisionResult="singleEntry">
+    <bpmn:businessRuleTask id="Activity_18gp6ln" name="Selecionar CNPJ" camunda:resultVariable="selecionada" camunda:decisionRef="seleciona-cnpj" camunda:mapDecisionResult="singleEntry">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_16imjg9</bpmn:incoming>
       <bpmn:outgoing>Flow_0parnb9</bpmn:outgoing>
     </bpmn:businessRuleTask>
     <bpmn:sequenceFlow id="Flow_0parnb9" sourceRef="Activity_18gp6ln" targetRef="Gateway_1if348h" />
     <bpmn:userTask id="Activity_0hegg77" name="Visualizar Resultado [INATIVA]">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="razao_social" label="Razão Social" type="string" />
-          <camunda:formField id="nome_fantasia" label="Nome Fantasia" type="string" />
-          <camunda:formField id="atividade_principal" label="Atividade Principal" type="string" />
-          <camunda:formField id="status" label="Status" type="string" />
-          <camunda:formField id="porte" label="Porte" type="string" />
-          <camunda:formField id="uf" label="UF" type="string" />
-          <camunda:formField id="municipio" label="Município" type="string" />
-          <camunda:formField id="porta_api" label="URL da Consulta" type="string" />
-          <camunda:formField id="cnpj" label="CNPJ" type="string" />
-          <camunda:formField id="selecao" label="Seleção" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
+      <bpmn:extensionElements />
       <bpmn:incoming>empresa_inativa</bpmn:incoming>
       <bpmn:outgoing>Flow_0z1inru</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_16cgyu3" name="Visualizar Resultado [ATIVA]">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="razao_social" label="Razão Social" type="string" />
-          <camunda:formField id="nome_fantasia" label="Nome Fantasia" type="string" />
-          <camunda:formField id="atividade_principal" label="Atividade Principal" type="string" />
-          <camunda:formField id="status" label="Status" type="string" />
-          <camunda:formField id="porte" label="Porte" type="string" />
-          <camunda:formField id="uf" label="UF" type="string" />
-          <camunda:formField id="municipio" label="Município" type="string" />
-          <camunda:formField id="porta_api" label="URL da Consulta" type="string" />
-          <camunda:formField id="cnpj" label="CNPJ" type="string" />
-          <camunda:formField id="selecao" label="Seleção" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
+      <bpmn:extensionElements />
       <bpmn:incoming>empresa_ativa</bpmn:incoming>
       <bpmn:outgoing>Flow_09tst1h</bpmn:outgoing>
     </bpmn:userTask>
@@ -145,7 +119,7 @@
         <di:waypoint x="805" y="300" />
         <di:waypoint x="890" y="300" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="805" y="282" width="19" height="14" />
+          <dc:Bounds x="840" y="282" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16imjg9_di" bpmnElement="Flow_16imjg9">
@@ -157,7 +131,7 @@
         <di:waypoint x="780" y="420" />
         <di:waypoint x="890" y="420" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="799" y="403" width="21" height="14" />
+          <dc:Bounds x="829" y="403" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1bxah2l_di" bpmnElement="Flow_1bxah2l">
